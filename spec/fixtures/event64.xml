@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ccb_api>
+<request>
+	<parameters>
+		<argument name="srv" value="event_profiles" />
+		<argument name="modified_since" value="2013-11-01T12:00:00Z" />
+	</parameters>
+</request>
+<response>
+<service>event_profiles</service>
+<service_action>execute</service_action>
+<availability>public</availability>
+	<events count="1">
+<event id="64">
+	<name>Tuesday AM Facilitator Meeting</name>
+	<description>Meeting for organizer, coaches and facilitator's of Tuesday morning women's bible study small groups.</description>
+	<leader_notes>Leader notes here</leader_notes>
+	<start_datetime>2013-11-12 08:45:00</start_datetime>
+	<start_date>Nov 12, 2013</start_date>
+	<start_time>8:45 AM</start_time>
+	<end_datetime>2013-11-12 09:30:00</end_datetime>
+	<end_date>Nov 12, 2013</end_date>
+	<end_time>9:30 AM</end_time>
+	<timezone>America/Chicago</timezone>
+	<recurrence_description>Nov 12, 2013 at 8:45 AM</recurrence_description>
+	<exceptions/>
+	<group id="173">Tues AM Leaders '13-'14</group>
+	<organizer id="1066">JoAnn Wert</organizer>
+	<phone type="contact">(651) 436-8248</phone>
+	<location>
+		<name>SOV</name>
+		<street_address>Fellowship B
+14107 Hudson Road South</street_address>
+		<city>Afton</city>
+		<state>MN</state>
+		<zip>55001</zip>
+		<line_1>Fellowship B
+14107 Hudson Road South</line_1>
+		<line_2>Afton, MN 55001</line_2>
+	</location>
+	<registration>
+		<limit>0</limit>
+		<event_type id="1">Open to All</event_type>
+		<forms/>
+	</registration>
+	<resources>
+		<resource id="8">
+			<name>Kitchen—Main</name>
+			<description>Kitchen in the main building. Clean up of equipment and counters is expected.</description>
+			<status id="3">Approved</status>
+			<resource_type>Location</resource_type>
+			<user_defined_fields/>
+		</resource>
+		<resource id="17">
+			<name>Fellowship Room—B</name>
+			<description>&lt;html&gt;&#13;
+5 60&quot; round tables, 30 chairs, A/V equipment (projector, audio, computer connection, DVD, Apple TV)&lt;br&gt;&#13;
+Fellowship B, C, and D, or a combination, may be reserved to form a larger room.</description>
+			<status id="3">Approved</status>
+			<resource_type>Location</resource_type>
+			<user_defined_fields/>
+		</resource>
+	</resources>
+	<setup>
+		<start>2013-11-12 08:15:00</start>
+		<end>2013-11-12 08:45:00</end>
+		<notes>Setup notes here</notes>
+	</setup>
+	<event_grouping id="1">Small Groups</event_grouping>
+	<creator id="1066">JoAnn Wert</creator>
+	<modifier id="1066">JoAnn Wert</modifier>
+	<created>2013-07-24 12:26:44</created>
+	<modified>2013-11-06 10:22:10</modified>
+</event>
+	</events>
+</response>
+</ccb_api>

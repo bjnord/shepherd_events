@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+$options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: fetch-events [$options]"
+  opts.on("-D", "--[no-]dry-run", "Dry run (don't update DB)") do |d|
+    $options[:dryrun] = d
+  end
+  opts.on("-V", "--[no-]verbose", "Run verbosely") do |v|
+    $options[:verbose] = v
+  end
+  opts.on_tail("-H", "--helpme", "Display command-line $options") do
+    puts opts
+    exit
+  end
+end.parse!
+
+xml = EventFetcher.event_profiles
+Event.from_xml(xml).each do |event|
+  $stderr.puts "origin_ident=#{event.origin_ident} name='#{event.name}'" if $options[:verbose]
+end

@@ -4,6 +4,9 @@
 # ALL-ENVIRONMENT SETTINGS
 #
 time_zone: 'Central Time (US & Canada)'
+origin_url: 'yoururlhere'
+origin_user: 'youruserhere'
+origin_passwd: 'yourpasswdhere'
 
 # PER-ENVIRONMENT SETTINGS
 #
