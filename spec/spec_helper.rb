@@ -53,8 +53,8 @@ RSpec::Matchers.define :be_the_same_time_as do |expected|
 end
 
 require 'simplecov'
-SimpleCov.adapters.define 'rails4_bjn' do
-  load_adapter 'test_frameworks'
+SimpleCov.profiles.define 'rails4_bjn' do
+  load_profile 'test_frameworks'
   add_filter '/config/'
   add_filter '/db/'
   add_group 'Models', 'app/models'
