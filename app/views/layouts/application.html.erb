@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShepherdEvents</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="nav">
+  </div>
+
+  <% flash.each do |key, message| %>
+    <% next unless [:notice, :error, :alert].include?(key) %>
+    <%= content_tag :div, message, id: "flash_#{key}", class: "flash_message" %>
+  <% end %>
+
+  <div id="content">
+    <%= yield %>
+  </div>
+
+  <%# NB: has to be in body, to work with Turbolinks? %>
+  <%= yield :javascript %>
+
+</body>
+</html>
