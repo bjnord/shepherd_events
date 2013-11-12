@@ -35,8 +35,8 @@ end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+# Use unicorn as the production app server
+gem 'unicorn', group: :production
 
 # Use Capistrano for deployment
 gem 'capistrano', '~> 2.15.5', group: :development
@@ -56,6 +56,7 @@ group :development, :test do
   gem "guard-livereload", "~> 1.4.0", require: false
   gem "guard-rspec", require: false
   gem "guard-spring", require: false
+  gem "capistrano-unicorn", require: false
 end
 
 group :test do
