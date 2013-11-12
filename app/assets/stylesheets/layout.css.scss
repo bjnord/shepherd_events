@@ -1,0 +1,26 @@
+@import "globals";
+
+// restore a few useful default styles that reset.css took away
+/*
+p {
+  margin: 1em 0;
+}
+*/
+
+.flash_message {
+  -webkit-box-shadow: 2px 2px 5px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow:    2px 2px 5px rgba(50, 50, 50, 0.75);
+  box-shadow:         2px 2px 5px rgba(50, 50, 50, 0.75);
+  margin: 0.8em 1em 1.2em;
+  padding: 0.4em 0.6em;
+}
+#flash_notice {
+  color: $color-flash-notice;
+}
+#flash_error, #flash_alert {
+  color: $color-flash-error;
+}
+
+#content {
+  padding: 0 1em;
+}
