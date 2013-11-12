@@ -51,7 +51,7 @@ group :development, :test do
   gem "webrat"
   gem "simplecov", require: false
   gem "rails_best_practices", require: false
-  gem "spring", require: false
+  gem "spring", "~> 0.0.11", require: false
   gem "guard", "~> 1.8.3", require: false
   gem "guard-livereload", "~> 1.4.0", require: false
   gem "guard-rspec", require: false
