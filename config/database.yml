@@ -23,7 +23,7 @@ production:
   host: 127.0.0.1
   port: 3306
   username: rails
-  #password: <%= begin IO.read("/path/to/.dbpasswd") rescue "" end %>
+  password: <%= APP_CONFIG['production']['db_password'] %>
   #database: database_name_here
   encoding: utf8
   reconnect: false

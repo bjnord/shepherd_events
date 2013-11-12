@@ -1,0 +1,19 @@
+# NB: you can't use Ruby symbols (like :debug) in this file!
+# use the string equivalent
+
+# ALL-ENVIRONMENT SETTINGS
+#
+time_zone: 'Central Time (US & Canada)'
+
+# PER-ENVIRONMENT SETTINGS
+#
+development:
+  hostname: 'localhost:3000'
+  log_level: 'debug'
+
+production:
+  hostname: 'localhost:3030'
+  log_level: 'info'
+  caching: true
+  db_password: 'yourdbpasswordhere'
+

@@ -2,7 +2,7 @@ ShepherdEvents::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
-  config.cache_classes = true
+  config.cache_classes = APP_CONFIG['production']['caching'].nil? ? true : APP_CONFIG['production']['caching']
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both thread web servers
@@ -12,7 +12,7 @@ ShepherdEvents::Application.configure do
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = true
+  config.action_controller.perform_caching = APP_CONFIG['production']['caching'].nil? ? true : APP_CONFIG['production']['caching']
 
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
@@ -43,7 +43,7 @@ ShepherdEvents::Application.configure do
   # config.force_ssl = true
 
   # Set to :debug to see everything in the log.
-  config.log_level = :info
+  config.log_level = APP_CONFIG['production']['log_level'] ? APP_CONFIG['production']['log_level'].to_sym : :info
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
@@ -64,7 +64,7 @@ ShepherdEvents::Application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { host: 'production.example.com' }
+  config.action_mailer.default_url_options = { host: APP_CONFIG['production']['hostname'] || 'production.example.com' }
   config.action_mailer.delivery_method = :sendmail
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
