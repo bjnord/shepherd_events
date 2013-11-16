@@ -6,7 +6,7 @@ UID:<%= ics_uuid(event_url(event)) %>
 CREATED:<%= ics_time(event.created_at) %>
 LAST-MODIFIED:<%= ics_time(event.updated_at) %>
 <%= ics_fold("SUMMARY:#{event.summary}") %>
-<%= ics_fold("DESCRIPTION:#{event.leader_notes}") %><%# FIXME .description (composite method) %>
+<%= ics_fold("DESCRIPTION:#{event.notes}") %>
 <%= ics_fold("LOCATION:#{event.resource_names.join(',')}") %>
 <% unless event.organizer.blank? -%>
 <%= ics_fold("ORGANIZER;CN=#{event.organizer}:MAILTO:office@shepherd-lutheran.org") %>

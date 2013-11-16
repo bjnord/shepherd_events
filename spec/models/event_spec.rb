@@ -71,6 +71,28 @@ describe Event do
     end
   end
 
+  describe '#notes' do
+    context "with nothing" do
+      subject { FactoryGirl.build(:event).notes }
+      it { should == "" }
+    end
+
+    context "with only leader_notes" do
+      subject { FactoryGirl.build(:event, leader_notes: "Wash").notes }
+      it { should == "Leader Notes: Wash" }
+    end
+
+    context "with only setup_notes" do
+      subject { FactoryGirl.build(:event, setup_notes: "Dry").notes }
+      it { should == "Setup Notes: Dry" }
+    end
+
+    context "with both leader_notes and setup_notes" do
+      subject { FactoryGirl.build(:event, leader_notes: "Wash", setup_notes: "Dry").notes }
+      it { should == "Leader Notes: Wash\\n\\nSetup Notes: Dry" }
+    end
+  end
+
   describe '#resource_names' do
     before do
       @event = FactoryGirl.build(:event)

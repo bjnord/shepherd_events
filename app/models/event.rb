@@ -47,6 +47,13 @@ class Event < ActiveRecord::Base
     "#{name} (#{group})"
   end
 
+  def notes
+    sections = []
+    sections << "Leader Notes: #{leader_notes}" if !leader_notes.blank?
+    sections << "Setup Notes: #{setup_notes}" if !setup_notes.blank?
+    sections.join("\\n\\n")
+  end
+
   def resource_names
     resources.collect {|r| r.name }
   end
