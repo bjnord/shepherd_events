@@ -9,15 +9,30 @@ class Event < ActiveRecord::Base
     xml.collect do |event_element|
       event = Event.new({origin_ident: event_element['id']})
       event.name = event_element.at('./name').text
-      event.leader_notes = event_element.at('./leader_notes').text
       event.starts_at = Time.parse(event_element.at('./start_datetime').text)
       event.ends_at = Time.parse(event_element.at('./end_datetime').text)
-      event.recurrence_description = event_element.at('./recurrence_description').text
-      event.group = event_element.at('./group').text
-      event.organizer = event_element.at('./organizer').text
-      event.setup_starts_at = Time.parse(event_element.at('./setup/start').text)
-      event.setup_ends_at = Time.parse(event_element.at('./setup/end').text)
-      event.setup_notes = event_element.at('./setup/notes').text
+      # FIXME loop and use metaprogramming
+      if subelement = event_element.at('./leader_notes')
+        event.leader_notes = subelement.text
+      end
+      if subelement = event_element.at('./recurrence_description')
+        event.recurrence_description = subelement.text
+      end
+      if subelement = event_element.at('./group')
+        event.group = subelement.text
+      end
+      if subelement = event_element.at('./organizer')
+        event.organizer = subelement.text
+      end
+      if subelement = event_element.at('./setup/start')
+        event.setup_starts_at = Time.parse(subelement.text)
+      end
+      if subelement = event_element.at('./setup/end')
+        event.setup_ends_at = Time.parse(subelement.text)
+      end
+      if subelement = event_element.at('./setup/notes')
+        event.setup_notes = subelement.text
+      end
       event.resources = Resource.from_xml(event_element.xpath('./resources/resource'))
       event
     end
