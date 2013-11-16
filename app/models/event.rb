@@ -37,4 +37,8 @@ class Event < ActiveRecord::Base
       event
     end
   end
+
+  def setupable?
+    resources.select {|r| r.status && (r.status == 'Approved') }.length > 0
+  end
 end

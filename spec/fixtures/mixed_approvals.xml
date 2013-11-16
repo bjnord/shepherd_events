@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ccb_api>
+<request>
+	<parameters>
+		<argument name="srv" value="event_profiles" />
+		<argument name="modified_since" value="2013-11-01T12:00:00Z" />
+	</parameters>
+</request>
+<response>
+<service>event_profiles</service>
+<service_action>execute</service_action>
+<availability>public</availability>
+	<events count="37">
+<event id="64">
+	<name>Tuesday AM Facilitator Meeting</name>
+	<start_datetime>2013-11-12 08:45:00</start_datetime>
+	<end_datetime>2013-11-12 09:30:00</end_datetime>
+	<resources>
+		<resource id="8">
+			<name>Kitchen—Main</name>
+			<status id="3">Approved</status>
+		</resource>
+		<resource id="17">
+			<name>Fellowship Room—B</name>
+			<status id="3">Approved</status>
+		</resource>
+	</resources>
+</event>
+<event id="485">
+	<name>New Connections</name>
+	<start_datetime>2014-03-06 19:00:00</start_datetime>
+	<end_datetime>2014-03-06 20:30:00</end_datetime>
+	<resources>
+		<resource id="10">
+			<name>Nursery</name>
+			<status>Requested</status>
+		</resource>
+		<resource id="17">
+			<name>Fellowship Room—B</name>
+			<status>Requested</status>
+		</resource>
+		<resource id="35">
+			<name>Room 161</name>
+			<status id="3">Approved</status>
+		</resource>
+	</resources>
+</event>
+<event id="366">
+	<name>Musical Practice</name>
+	<start_datetime>2013-11-03 12:00:00</start_datetime>
+	<end_datetime>2013-11-03 14:30:00</end_datetime>
+	<resources>
+		<resource id="3">
+			<name>Community Center—A</name>
+			<status>Requested</status>
+		</resource>
+		<resource id="4">
+			<name>Community Center—B</name>
+			<status>Requested</status>
+		</resource>
+	</resources>
+</event>
+<event id="435">
+	<name>Leader Huddle</name>
+	<start_datetime>2013-11-24 10:00:00</start_datetime>
+	<end_datetime>2013-11-24 11:00:00</end_datetime>
+	<resources/>
+</event>
+	</events>
+</response>
+</ccb_api>
