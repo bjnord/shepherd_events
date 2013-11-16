@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  has_many :resources, dependent: :destroy
+
   validates :name, presence: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true
@@ -16,6 +18,7 @@ class Event < ActiveRecord::Base
       event.setup_starts_at = Time.parse(event_element.at('./setup/start').text)
       event.setup_ends_at = Time.parse(event_element.at('./setup/end').text)
       event.setup_notes = event_element.at('./setup/notes').text
+      event.resources = Resource.from_xml(event_element.xpath('./resources/resource'))
       event
     end
   end

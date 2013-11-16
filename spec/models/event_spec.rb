@@ -13,7 +13,7 @@ describe Event do
       Nokogiri::XML(f).xpath("//events/event")
     end
     before { @events = Event.from_xml(xml) }
-    specify { @events.count.should == 1 }
+    specify { @events.length.should == 1 }
     specify { @events[0].origin_ident.should == 64 }
     specify { @events[0].name.should == 'Tuesday AM Facilitator Meeting' }
     specify { @events[0].leader_notes.should == 'Leader notes here' }
@@ -25,5 +25,6 @@ describe Event do
     specify { @events[0].setup_starts_at.should == Time.new(2013,11,12,8,15,0) }
     specify { @events[0].setup_ends_at.should == Time.new(2013,11,12,8,45,0) }
     specify { @events[0].setup_notes.should == 'Setup notes here' }
+    specify { @events[0].resources.length.should == 2 }
   end
 end
