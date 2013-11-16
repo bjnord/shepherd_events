@@ -9,6 +9,9 @@ module EventsHelper
 
   def ics_fold(line)
     return "" if !line
+    # FIXME '\\\1' doesn't work for some reason; do two-step shuffle for now
+    line.gsub!(/([,;\\])/, '§\1')
+    line.gsub!(/§/, '\\')
     lines = line.chars.each_slice(75).map(&:join)
     lines.join("\r\n ").html_safe
   end

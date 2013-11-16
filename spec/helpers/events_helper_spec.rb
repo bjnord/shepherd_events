@@ -9,6 +9,11 @@ describe EventsHelper do
       it { should == "" }
     end
 
+    context "with characters required to be escaped" do
+      let(:line) { 'A man, a plan, a canal; Panama \ palindrome' }
+      it { should == 'A man\, a plan\, a canal\; Panama \\\\ palindrome' }
+    end
+
     context "with a short line" do
       let(:line) { "major " * 10 }
       it { should == "major " * 10 }

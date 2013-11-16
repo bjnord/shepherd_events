@@ -9,7 +9,7 @@ LAST-MODIFIED:<%= ics_time(event.updated_at) %>
 <%= ics_fold("DESCRIPTION:#{event.notes}") %>
 <%= ics_fold("LOCATION:#{event.resource_names.join(',')}") %>
 <% unless event.organizer.blank? -%>
-<%= ics_fold("ORGANIZER;CN=#{event.organizer}:MAILTO:office@shepherd-lutheran.org") %>
+<%= ics_fold("ORGANIZER:CN=#{event.organizer}:MAILTO:office@shepherd-lutheran.org").sub(/:/, ';') %>
 <% end -%>
 URL:<%= event_url(event) %>
 CLASS:PUBLIC
