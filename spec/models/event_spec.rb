@@ -70,4 +70,13 @@ describe Event do
       it { should == "Collegial (Chums)" }
     end
   end
+
+  describe '#resource_names' do
+    before do
+      @event = FactoryGirl.build(:event)
+      @event.resources << FactoryGirl.build(:resource, name: 'Laurel')
+      @event.resources << FactoryGirl.build(:resource, name: 'Hardy')
+    end
+    specify { @event.resource_names.should =~ ['Laurel','Hardy'] }
+  end
 end

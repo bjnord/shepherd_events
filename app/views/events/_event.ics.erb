@@ -7,7 +7,7 @@ CREATED:<%= ics_time(event.created_at) %>
 LAST-MODIFIED:<%= ics_time(event.updated_at) %>
 SUMMARY:<%= event.summary.html_safe %>
 <%= ics_fold("DESCRIPTION:#{event.leader_notes}") %><%# FIXME .description (composite method) %>
-LOCATION:Location<%# FIXME .resource_names (composite method) %>
+<%= ics_fold("LOCATION:#{event.resource_names.join(',')}") %>
 ORGANIZER;CN=Joe Bloggs:MAILTO:bloggs@example.com<%# FIXME %>
 URL:<%= event_url(event) %>
 CLASS:PUBLIC

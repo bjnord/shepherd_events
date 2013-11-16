@@ -46,4 +46,8 @@ class Event < ActiveRecord::Base
     return name if group.blank?
     "#{name} (#{group})"
   end
+
+  def resource_names
+    resources.collect {|r| r.name }
+  end
 end
