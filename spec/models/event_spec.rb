@@ -91,6 +91,11 @@ describe Event do
       subject { FactoryGirl.build(:event, leader_notes: "Wash", setup_notes: "Dry").notes }
       it { should == "Leader Notes: Wash\\n\\nSetup Notes: Dry" }
     end
+
+    context "with leader_notes setup_notes and recurrence_description" do
+      subject { FactoryGirl.build(:event, leader_notes: "Wash", setup_notes: "Dry", recurrence_description: "After every meal").notes }
+      it { should == "Leader Notes: Wash\\n\\nSetup Notes: Dry\\n\\nRecurrence: After every meal" }
+    end
   end
 
   describe '#resource_names' do
