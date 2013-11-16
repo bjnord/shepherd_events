@@ -1,17 +1,8 @@
 BEGIN:VEVENT
+UID:<%= ics_uuid(event_url(event)) %>
+URL:<%= event_url(event) %>
+<%= ics_fold("SUMMARY:#{event.summary}") %>
 DTSTART:<%= ics_time(event.starts_at) %>
 DTEND:<%= ics_time(event.ends_at) %>
-DTSTAMP:<%= ics_time(Time.now) %>
-UID:<%= ics_uuid(event_url(event)) %>
-CREATED:<%= ics_time(event.created_at) %>
-LAST-MODIFIED:<%= ics_time(event.updated_at) %>
-<%= ics_fold("SUMMARY:#{event.summary}") %>
-<%= ics_fold("DESCRIPTION:#{event.notes}") %>
-<%= ics_fold("LOCATION:#{event.resource_names.join(',')}") %>
-<% unless event.organizer.blank? -%>
-<%= ics_fold("ORGANIZER:CN=#{event.organizer}:MAILTO:office@shepherd-lutheran.org").sub(/:/, ';') %>
-<% end -%>
-URL:<%= event_url(event) %>
-CLASS:PUBLIC
-SEQUENCE:0
+<%= render partial: 'event_common', locals: {event: event} -%>
 END:VEVENT

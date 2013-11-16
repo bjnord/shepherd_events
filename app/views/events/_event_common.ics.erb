@@ -1,0 +1,10 @@
+DTSTAMP:<%= ics_time(Time.now) %>
+CREATED:<%= ics_time(event.created_at) %>
+LAST-MODIFIED:<%= ics_time(event.updated_at) %>
+<%= ics_fold("DESCRIPTION:#{event.notes}") %>
+<%= ics_fold("LOCATION:#{event.resource_names.join(',')}") %>
+<% unless event.organizer.blank? -%>
+<%= ics_fold("ORGANIZER:CN=#{event.organizer}:MAILTO:office@shepherd-lutheran.org").sub(/:/, ';') %>
+<% end -%>
+CLASS:PUBLIC
+SEQUENCE:0
