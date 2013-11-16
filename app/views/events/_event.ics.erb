@@ -5,10 +5,12 @@ DTSTAMP:<%= ics_time(Time.now) %>
 UID:<%= ics_uuid(event_url(event)) %>
 CREATED:<%= ics_time(event.created_at) %>
 LAST-MODIFIED:<%= ics_time(event.updated_at) %>
-SUMMARY:<%= event.summary.html_safe %>
+<%= ics_fold("SUMMARY:#{event.summary}") %>
 <%= ics_fold("DESCRIPTION:#{event.leader_notes}") %><%# FIXME .description (composite method) %>
 <%= ics_fold("LOCATION:#{event.resource_names.join(',')}") %>
-ORGANIZER;CN=Joe Bloggs:MAILTO:bloggs@example.com<%# FIXME %>
+<% unless event.organizer.blank? -%>
+<%= ics_fold("ORGANIZER;CN=#{event.organizer}:MAILTO:office@shepherd-lutheran.org") %>
+<% end -%>
 URL:<%= event_url(event) %>
 CLASS:PUBLIC
 SEQUENCE:0

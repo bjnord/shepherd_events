@@ -10,6 +10,6 @@ module EventsHelper
   def ics_fold(line)
     return "" if !line
     lines = line.chars.each_slice(75).map(&:join)
-    lines.join("\r\n ")
+    lines.join("\r\n ").html_safe
   end
 end
