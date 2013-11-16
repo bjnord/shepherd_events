@@ -1,0 +1,15 @@
+BEGIN:VEVENT
+DTSTART:<%= ics_time(event.starts_at) %>
+DTEND:<%= ics_time(event.ends_at) %>
+DTSTAMP:<%= ics_time(Time.now) %>
+UID:<%= ics_uuid(event_url(event)) %>
+CREATED:<%= ics_time(event.created_at) %>
+LAST-MODIFIED:<%= ics_time(event.updated_at) %>
+SUMMARY:<%= event.name %><%# FIXME .title (composite method) %>
+<%= ics_fold("DESCRIPTION:#{event.leader_notes}") %><%# FIXME .description (composite method) %>
+LOCATION:Location<%# FIXME .resource_names (composite method) %>
+ORGANIZER;CN=Joe Bloggs:MAILTO:bloggs@example.com<%# FIXME %>
+URL:<%= event_url(event) %>
+CLASS:PUBLIC
+SEQUENCE:0
+END:VEVENT
