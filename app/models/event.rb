@@ -41,4 +41,9 @@ class Event < ActiveRecord::Base
   def setupable?
     resources.select {|r| r.status && (r.status == 'Approved') }.length > 0
   end
+
+  def summary
+    return name if group.blank?
+    "#{name} (#{group})"
+  end
 end

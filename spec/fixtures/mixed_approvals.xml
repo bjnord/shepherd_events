@@ -15,6 +15,7 @@
 	<name>Tuesday AM Facilitator Meeting</name>
 	<start_datetime>2013-11-12 08:45:00</start_datetime>
 	<end_datetime>2013-11-12 09:30:00</end_datetime>
+	<group id="173">Tues AM Leaders '13-'14</group>
 	<resources>
 		<resource id="8">
 			<name>Kitchen—Main</name>

@@ -58,4 +58,16 @@ describe Event do
       end
     end
   end
+
+  describe '#summary' do
+    context "with only name" do
+      subject { FactoryGirl.build(:event, name: "Solitary").summary }
+      it { should == "Solitary" }
+    end
+
+    context "with name and group" do
+      subject { FactoryGirl.build(:event, name: "Collegial", group: "Chums").summary }
+      it { should == "Collegial (Chums)" }
+    end
+  end
 end
