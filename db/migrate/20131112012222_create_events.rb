@@ -2,7 +2,7 @@ class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
       t.integer :origin_ident, default: 0, null: false
-      t.string :name, default: "", null: false
+      t.string :name, null: false
       t.text :leader_notes
       t.datetime :starts_at, null: false
       t.datetime :ends_at, null: false

@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  has_many :resources, dependent: :destroy
+  has_many :resources, dependent: :destroy, inverse_of: :event
 
   validates :name, presence: true
   validates :starts_at, presence: true

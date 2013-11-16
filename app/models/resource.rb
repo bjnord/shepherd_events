@@ -2,7 +2,7 @@ class Resource < ActiveRecord::Base
   belongs_to :event
   attr_accessor :status
 
-  validates :event_id, presence: true
+  validates :event, presence: true
   validates :name, presence: true
 
   def self.from_xml(xml)

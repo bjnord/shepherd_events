@@ -1,10 +1,11 @@
 class CreateResources < ActiveRecord::Migration
   def change
     create_table :resources do |t|
-      t.belongs_to :event, index: true
-      t.string :name, default: "", null: false
+      t.integer :event_id, null: false
+      t.string :name, null: false
 
       t.timestamps
     end
+    add_index :resources, :event_id
   end
 end

@@ -14,11 +14,11 @@
 ActiveRecord::Schema.define(version: 20131112012225) do
 
   create_table "events", force: true do |t|
-    t.integer  "origin_ident",           default: 0,  null: false
-    t.string   "name",                   default: "", null: false
+    t.integer  "origin_ident",           default: 0, null: false
+    t.string   "name",                               null: false
     t.text     "leader_notes"
-    t.datetime "starts_at",                           null: false
-    t.datetime "ends_at",                             null: false
+    t.datetime "starts_at",                          null: false
+    t.datetime "ends_at",                            null: false
     t.string   "recurrence_description"
     t.string   "group"
     t.string   "organizer"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20131112012225) do
   add_index "events", ["starts_at"], name: "index_events_on_starts_at"
 
   create_table "resources", force: true do |t|
-    t.integer  "event_id"
-    t.string   "name",       default: "", null: false
+    t.integer  "event_id",   null: false
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
