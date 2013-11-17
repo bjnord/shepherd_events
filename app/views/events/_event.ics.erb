@@ -1,3 +1,13 @@
+<% if event.setup_actually_starts_at -%>
+BEGIN:VEVENT
+UID:<%= ics_uuid(event_url(event, setup: true)) %>
+URL:<%= event_url(event, setup: true) %>
+<%= ics_fold("SUMMARY:Setup: #{event.name}") %>
+DTSTART:<%= ics_time(event.setup_actually_starts_at) %>
+DTEND:<%= ics_time(event.setup_actually_ends_at) %>
+<%= render partial: 'event_common', locals: {event: event} -%>
+END:VEVENT
+<% end -%>
 BEGIN:VEVENT
 UID:<%= ics_uuid(event_url(event)) %>
 URL:<%= event_url(event) %>
@@ -6,3 +16,13 @@ DTSTART:<%= ics_time(event.starts_at) %>
 DTEND:<%= ics_time(event.ends_at) %>
 <%= render partial: 'event_common', locals: {event: event} -%>
 END:VEVENT
+<% if event.teardown_ends_at -%>
+BEGIN:VEVENT
+UID:<%= ics_uuid(event_url(event, teardown: true)) %>
+URL:<%= event_url(event, teardown: true) %>
+<%= ics_fold("SUMMARY:Teardown: #{event.name}") %>
+DTSTART:<%= ics_time(event.teardown_starts_at) %>
+DTEND:<%= ics_time(event.teardown_ends_at) %>
+<%= render partial: 'event_common', locals: {event: event} -%>
+END:VEVENT
+<% end -%>
