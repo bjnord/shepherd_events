@@ -96,6 +96,11 @@ describe Event do
       subject { FactoryGirl.build(:event, leader_notes: "Wash", setup_notes: "Dry", recurrence_description: "After every meal").notes }
       it { should == "Leader Notes: Wash\\n\\nSetup Notes: Dry\\n\\nRecurrence: After every meal" }
     end
+
+    context 'with recurrence_description that looks like a single date' do
+      subject { FactoryGirl.build(:event, recurrence_description: "Nov 5, 2006 at 12:00 AM").notes }
+      it { should == "" }
+    end
   end
 
   describe '#resource_names' do
