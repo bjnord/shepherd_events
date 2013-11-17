@@ -106,4 +106,54 @@ describe Event do
     end
     specify { @event.resource_names.should =~ ['Laurel','Hardy'] }
   end
+
+  describe 'setup and teardown time blocks' do
+    context 'no setup times' do
+      subject { FactoryGirl.build(:event) }
+      its(:setup_actually_starts_at) { should be_nil }
+      its(:setup_actually_ends_at) { should be_nil }
+      its(:teardown_starts_at) { should be_nil }
+      its(:teardown_ends_at) { should be_nil }
+    end
+
+    context 'setup times completely precede the event' do
+      subject { FactoryGirl.build(:event, starts_at: Time.now, setup_starts_at: 1.hour.ago, setup_ends_at: 1.minute.ago) }
+      its(:setup_actually_starts_at) { should == subject.setup_starts_at }
+      its(:setup_actually_ends_at) { should == subject.setup_ends_at }
+      its(:teardown_starts_at) { should be_nil }
+      its(:teardown_ends_at) { should be_nil }
+    end
+
+    context 'setup times overlap the event start' do
+      subject { FactoryGirl.build(:event, starts_at: Time.now, setup_starts_at: 1.hour.ago, setup_ends_at: 1.minute.from_now ) }
+      its(:setup_actually_starts_at) { should == subject.setup_starts_at }
+      its(:setup_actually_ends_at) { should == subject.starts_at }
+      its(:teardown_starts_at) { should be_nil }
+      its(:teardown_ends_at) { should be_nil }
+    end
+
+    context 'setup times completely encompass the event' do
+      subject { FactoryGirl.build(:event, starts_at: Time.now, ends_at: 1.hour.from_now, setup_starts_at: 1.hour.ago, setup_ends_at: 2.hours.from_now ) }
+      its(:setup_actually_starts_at) { should == subject.setup_starts_at }
+      its(:setup_actually_ends_at) { should == subject.starts_at }
+      its(:teardown_starts_at) { should == subject.ends_at }
+      its(:teardown_ends_at) { should == subject.setup_ends_at }
+    end
+
+    context 'setup times overlap the event end' do
+      subject { FactoryGirl.build(:event, starts_at: Time.now, ends_at: 1.hour.from_now, setup_starts_at: 1.minute.from_now, setup_ends_at: 2.hours.from_now ) }
+      its(:setup_actually_starts_at) { should be_nil }
+      its(:setup_actually_ends_at) { should be_nil }
+      its(:teardown_starts_at) { should == subject.ends_at }
+      its(:teardown_ends_at) { should == subject.setup_ends_at }
+    end
+
+    context 'setup times completely succeed the event' do
+      subject { FactoryGirl.build(:event, starts_at: Time.now, ends_at: 1.hour.from_now, setup_starts_at: 1.hour.from_now + 1.minute, setup_ends_at: 2.hours.from_now ) }
+      its(:setup_actually_starts_at) { should be_nil }
+      its(:setup_actually_ends_at) { should be_nil }
+      its(:teardown_starts_at) { should == subject.setup_starts_at }
+      its(:teardown_ends_at) { should == subject.setup_ends_at }
+    end
+  end
 end

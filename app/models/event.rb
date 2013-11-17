@@ -58,4 +58,20 @@ class Event < ActiveRecord::Base
   def resource_names
     resources.collect {|r| r.name }
   end
+
+  def setup_actually_starts_at
+    (setup_starts_at && (setup_starts_at < starts_at)) ? setup_starts_at : nil
+  end
+  def setup_actually_ends_at
+    return nil unless setup_actually_starts_at
+    (setup_ends_at < starts_at) ? setup_ends_at : starts_at
+  end
+
+  def teardown_ends_at
+    (setup_ends_at && (setup_ends_at > ends_at)) ? setup_ends_at : nil
+  end
+  def teardown_starts_at
+    return nil unless teardown_ends_at
+    (setup_starts_at > ends_at) ? setup_starts_at : ends_at
+  end
 end
