@@ -60,39 +60,39 @@ describe Event do
   end
 
   describe '#summary' do
-    context "with only name" do
+    context 'with only name' do
       subject { FactoryGirl.build(:event, name: "Solitary").summary }
       it { should == "Solitary" }
     end
 
-    context "with name and group" do
+    context 'with name and group' do
       subject { FactoryGirl.build(:event, name: "Collegial", group: "Chums").summary }
       it { should == "Collegial (Chums)" }
     end
   end
 
   describe '#notes' do
-    context "with nothing" do
+    context 'with nothing' do
       subject { FactoryGirl.build(:event).notes }
       it { should == "" }
     end
 
-    context "with only leader_notes" do
+    context 'with only leader_notes' do
       subject { FactoryGirl.build(:event, leader_notes: "Wash").notes }
       it { should == "Leader Notes: Wash" }
     end
 
-    context "with only setup_notes" do
+    context 'with only setup_notes' do
       subject { FactoryGirl.build(:event, setup_notes: "Dry").notes }
       it { should == "Setup Notes: Dry" }
     end
 
-    context "with both leader_notes and setup_notes" do
+    context 'with both leader_notes and setup_notes' do
       subject { FactoryGirl.build(:event, leader_notes: "Wash", setup_notes: "Dry").notes }
       it { should == "Leader Notes: Wash\\n\\nSetup Notes: Dry" }
     end
 
-    context "with leader_notes setup_notes and recurrence_description" do
+    context 'with leader_notes setup_notes and recurrence_description' do
       subject { FactoryGirl.build(:event, leader_notes: "Wash", setup_notes: "Dry", recurrence_description: "After every meal").notes }
       it { should == "Leader Notes: Wash\\n\\nSetup Notes: Dry\\n\\nRecurrence: After every meal" }
     end
