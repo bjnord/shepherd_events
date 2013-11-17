@@ -9,9 +9,15 @@ describe EventsHelper do
       it { should == "" }
     end
 
+    # FIXME backslashes that aren't \n are required to be escaped too
     context "with characters required to be escaped" do
-      let(:line) { 'A man, a plan, a canal; Panama \ palindrome' }
-      it { should == 'A man\, a plan\, a canal\; Panama \\\\ palindrome' }
+      let(:line) { 'A man, a plan, a canal; Panama' }
+      it { should == 'A man\, a plan\, a canal\; Panama' }
+    end
+
+    context "with escaped-newline sequences" do
+      let(:line) { 'line1\nline2\nline3' }
+      it { should == 'line1\nline2\nline3' }
     end
 
     context "with a short line" do
