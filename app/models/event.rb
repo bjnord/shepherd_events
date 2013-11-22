@@ -51,6 +51,7 @@ class Event < ActiveRecord::Base
     sections = []
     sections << "Leader Notes: #{leader_notes}" if !leader_notes.blank?
     sections << "Setup Notes: #{setup_notes}" if !setup_notes.blank?
+    sections << "Organizer: #{organizer}" if !organizer.blank?
     if !recurrence_description.blank? && (recurrence_description !~ /^[A-Z][a-z][a-z]\s\d/)
       sections << "Recurrence: #{recurrence_description}"
     end

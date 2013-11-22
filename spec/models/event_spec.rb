@@ -101,6 +101,11 @@ describe Event do
       subject { FactoryGirl.build(:event, recurrence_description: "Nov 5, 2006 at 12:00 AM").notes }
       it { should == "" }
     end
+
+    context 'with leader_notes and organizer' do
+      subject { FactoryGirl.build(:event, leader_notes: "Wash", organizer: "Doc").notes }
+      it { should == "Leader Notes: Wash\\n\\nOrganizer: Doc" }
+    end
   end
 
   describe '#resource_names' do
