@@ -68,3 +68,4 @@ group :assets do
 end
 
 gem 'uuidtools'
+gem 'nokogiri', '~> 1.6.0'
