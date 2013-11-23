@@ -24,7 +24,7 @@ production:
   port: 3306
   username: rails
   password: <%= APP_CONFIG['production']['db_password'] %>
-  #database: database_name_here
+  database: shepherd_events
   encoding: utf8
   reconnect: false
   pool: 5
