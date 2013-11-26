@@ -11,6 +11,9 @@ OptionParser.new do |opts|
   opts.on("-D", "--[no-]dry-run", "Dry run (don't update DB)") do |d|
     $options[:dryrun] = d
   end
+  opts.on("-X", "--destroy-all", "Destroy all previous events") do |x|
+    $options[:destroyall] = x
+  end
   opts.on("-V", "--[no-]verbose", "Run verbosely") do |v|
     $options[:verbose] = v
   end
@@ -23,10 +26,18 @@ end.parse!
 modified_since = $options[:since] ? Date.parse($options[:since]) : 1.week.ago.to_date
 $stderr.puts "fetching events modified since #{modified_since}" if $options[:verbose]
 xml = EventFetcher.event_profiles(modified_since)
-Event.destroy_all unless $options[:dryrun]
+if $options[:destroyall]
+  Event.destroy_all unless $options[:dryrun]
+end
 Event.from_xml(xml).each do |event|
-  $stderr.puts "origin_ident=#{event.origin_ident} name=[#{event.name}] setupable? #{event.setupable?}" if $options[:verbose]
-  if event.setupable? && !$options[:dryrun]
-    event.save!
+  if !event.setupable?
+    $stderr.puts "ignoring origin_ident=#{event.origin_ident} name=[#{event.name}]" if $options[:verbose]
+  elsif old_event = Event.find_by_origin_ident(event.origin_ident)
+    $stderr.puts "EXISTING id=#{old_event.id} origin_ident=#{event.origin_ident} name=[#{event.name}]" if $options[:verbose]
+    old_event.set_from(event)
+    old_event.save! unless $options[:dryrun]
+  else
+    $stderr.puts "NEW origin_ident=#{event.origin_ident} name=[#{event.name}]" if $options[:verbose]
+    event.save! unless $options[:dryrun]
   end
 end

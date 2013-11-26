@@ -38,6 +38,14 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def set_from(other_event)
+    other_event.changed.each do |attr|
+      next if ['id', 'created_at'].include?(attr)
+      self.send("#{attr}=", other_event.send(attr))
+    end
+    self
+  end
+
   def setupable?
     resources.select {|r| r.status && (r.status == 'Approved') }.length > 0
   end
