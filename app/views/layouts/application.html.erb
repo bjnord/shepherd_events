@@ -7,9 +7,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="nav">
-  </div>
-
   <% flash.each do |key, message| %>
     <% next unless [:notice, :error, :alert].include?(key) %>
     <%= content_tag :div, message, id: "flash_#{key}", class: "flash_message" %>
@@ -21,6 +18,5 @@
 
   <%# NB: has to be in body, to work with Turbolinks? %>
   <%= yield :javascript %>
-
 </body>
 </html>
