@@ -13,6 +13,9 @@ UID:<%= ics_uuid(event_url(event)) %>
 URL:<%= event_url(event) %>
 <%= ics_fold("SUMMARY:#{event.summary}") %>
 DTSTART:<%= ics_time(event.starts_at) %>
+<% if event.recurs? -%>
+RRULE:<%= Recurrence.new(event.recurrence_description.dup).rrule %>
+<% end -%>
 DTEND:<%= ics_time(event.ends_at) %>
 <%= render partial: 'event_common', locals: {event: event} -%>
 END:VEVENT
