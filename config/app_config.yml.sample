@@ -7,6 +7,9 @@ time_zone: 'Central Time (US & Canada)'
 origin_url: 'https://yourorganizationhere.ccbchurch.com/api.php'
 origin_user: 'youruserhere'
 origin_passwd: 'yourpasswdhere'
+ics_name: 'Event Calendar'
+ics_prodid_domain: 'Example.org'
+ics_time_zone: 'America/Chicago'
 
 # PER-ENVIRONMENT SETTINGS
 #

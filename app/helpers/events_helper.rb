@@ -15,4 +15,16 @@ module EventsHelper
     lines = line.chars.each_slice(75).map(&:join)
     lines.join("\r\n ").html_safe
   end
+
+  def ics_name
+    APP_CONFIG['ics_name'] || 'Event Calendar'
+  end
+
+  def ics_prodid_domain
+    APP_CONFIG['ics_prodid_domain'] || 'Example.org'
+  end
+
+  def ics_time_zone
+    APP_CONFIG['ics_time_zone'] || 'America/Chicago'
+  end
 end
