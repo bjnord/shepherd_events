@@ -14,7 +14,7 @@ URL:<%= event_url(event) %>
 <%= ics_fold("SUMMARY:#{event.summary}") %>
 DTSTART<%= ics_time(event.starts_at, ics_time_zone) %>
 <% if event.recurs? -%>
-RRULE:<%= Recurrence.new(event.recurrence_description.dup).rrule %>
+RRULE:<%= Recurrence.new(event.recurrence_description.dup).rrule(event.ends_at) %>
 <% end -%>
 DTEND<%= ics_time(event.ends_at, ics_time_zone) %>
 <%= render partial: 'event_common', locals: {event: event} -%>

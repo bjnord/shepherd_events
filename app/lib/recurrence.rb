@@ -21,10 +21,15 @@ class Recurrence
     end
   end
 
-  def rrule
+  def rrule(etime = nil)
     rr = "FREQ=#{@freq}"
     if @until
-      rr += ";UNTIL=#{@until.strftime('%Y%m%d')}T000000Z"
+      if etime.nil?
+        end_dt = @until.to_datetime
+      else
+        end_dt = etime.change({year: @until.year, month: @until.month, day: @until.day})
+      end
+      rr += ";UNTIL=#{end_dt.utc.strftime('%Y%m%dT%H%M%SZ')}"
     end
     if @byday
       rr += ";BYDAY=#{@byday}"
