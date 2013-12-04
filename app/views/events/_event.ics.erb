@@ -3,8 +3,8 @@ BEGIN:VEVENT
 UID:<%= ics_uuid(event_url(event, setup: true)) %>
 URL:<%= event_url(event, setup: true) %>
 <%= ics_fold("SUMMARY:Setup: #{event.name}") %>
-DTSTART:<%= ics_time(event.setup_actually_starts_at) %>
-DTEND:<%= ics_time(event.setup_actually_ends_at) %>
+DTSTART<%= ics_time(event.setup_actually_starts_at, ics_time_zone) %>
+DTEND<%= ics_time(event.setup_actually_ends_at, ics_time_zone) %>
 <%= render partial: 'event_common', locals: {event: event} -%>
 END:VEVENT
 <% end -%>
@@ -12,11 +12,11 @@ BEGIN:VEVENT
 UID:<%= ics_uuid(event_url(event)) %>
 URL:<%= event_url(event) %>
 <%= ics_fold("SUMMARY:#{event.summary}") %>
-DTSTART:<%= ics_time(event.starts_at) %>
+DTSTART<%= ics_time(event.starts_at, ics_time_zone) %>
 <% if event.recurs? -%>
 RRULE:<%= Recurrence.new(event.recurrence_description.dup).rrule %>
 <% end -%>
-DTEND:<%= ics_time(event.ends_at) %>
+DTEND<%= ics_time(event.ends_at, ics_time_zone) %>
 <%= render partial: 'event_common', locals: {event: event} -%>
 END:VEVENT
 <% if event.teardown_ends_at -%>
@@ -24,8 +24,8 @@ BEGIN:VEVENT
 UID:<%= ics_uuid(event_url(event, teardown: true)) %>
 URL:<%= event_url(event, teardown: true) %>
 <%= ics_fold("SUMMARY:Teardown: #{event.name}") %>
-DTSTART:<%= ics_time(event.teardown_starts_at) %>
-DTEND:<%= ics_time(event.teardown_ends_at) %>
+DTSTART<%= ics_time(event.teardown_starts_at, ics_time_zone) %>
+DTEND<%= ics_time(event.teardown_ends_at, ics_time_zone) %>
 <%= render partial: 'event_common', locals: {event: event} -%>
 END:VEVENT
 <% end -%>

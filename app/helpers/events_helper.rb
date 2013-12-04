@@ -1,6 +1,10 @@
 module EventsHelper
-  def ics_time(datetime)
-    datetime.utc.strftime("%Y%m%dT%H%M%SZ")
+  def ics_time(datetime, zone = nil)
+    if zone.blank?
+      datetime.utc.strftime(":%Y%m%dT%H%M%SZ")
+    else
+      datetime.strftime(";TZID=#{zone}:%Y%m%dT%H%M%S")
+    end
   end
 
   def ics_uuid(url)
