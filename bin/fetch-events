@@ -30,10 +30,16 @@ if $options[:destroyall]
   Event.destroy_all unless $options[:dryrun]
 end
 Event.from_xml(xml).each do |event|
+  old_event = Event.find_by_origin_ident(event.origin_ident)
   if !event.setupable?
-    $stderr.puts "ignoring origin_ident=#{event.origin_ident} name=[#{event.name}]" if $options[:verbose]
-  elsif old_event = Event.find_by_origin_ident(event.origin_ident)
-    $stderr.puts "EXISTING id=#{old_event.id} origin_ident=#{event.origin_ident} name=[#{event.name}]" if $options[:verbose]
+    if old_event
+      $stderr.puts "REMOVE id=#{old_event.id} origin_ident=#{event.origin_ident} name=[#{event.name}]" if $options[:verbose]
+      old_event.destroy! unless $options[:dryrun]
+    else
+      $stderr.puts "(ignore) origin_ident=#{event.origin_ident} name=[#{event.name}]" if $options[:verbose]
+    end
+  elsif old_event
+    $stderr.puts "UPDATE id=#{old_event.id} origin_ident=#{event.origin_ident} name=[#{event.name}]" if $options[:verbose]
     old_event.set_from(event)
     old_event.save! unless $options[:dryrun]
   else
