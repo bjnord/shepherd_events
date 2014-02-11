@@ -17,7 +17,7 @@ class Recurrence
       @freq = 'MONTHLY'
       @byday = deordinal(m[1]).to_s + m[2][0..1].upcase
     else
-      raise RecurrenceError "unknown recurrence '#{description}'"
+      raise RecurrenceError, "unknown recurrence '#{description}'"
     end
   end
 
@@ -54,7 +54,7 @@ private
     when 'fifth'
       n = 5
     else
-      raise RecurrenceError "unknown ordinal '#{ord}'"
+      raise RecurrenceError, "unknown ordinal '#{ord}'"
     end
     n
   end

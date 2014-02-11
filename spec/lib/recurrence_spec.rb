@@ -42,19 +42,19 @@ describe Recurrence do
 
     context 'with an invalid ordinal' do
       specify do
-        expect { Recurrence.new('Every month on the twenty-seventh Saturday of the month') }.to raise_error
+        expect { Recurrence.new('Every month on the twentieth Saturday of the month') }.to raise_error(RecurrenceError, /unknown\s+ordinal/)
       end
     end
 
     context 'with an unknown monthly recurrence' do
       specify do
-        expect { Recurrence.new('Every month on the full moon') }.to raise_error
+        expect { Recurrence.new('Every month on the full moon') }.to raise_error(RecurrenceError, /unknown\s+recurrence/)
       end
     end
 
     context 'with an unknown recurrence' do
       specify do
-        expect { Recurrence.new('Every decade') }.to raise_error
+        expect { Recurrence.new('Every decade') }.to raise_error(RecurrenceError, /unknown\s+recurrence/)
       end
     end
   end
