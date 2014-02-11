@@ -9,7 +9,8 @@ class Event < ActiveRecord::Base
     xml.collect do |event_element|
       event = Event.new({origin_ident: event_element['id']})
       event.name = event_element.at('./name').text
-      event.starts_at = Time.parse(event_element.at('./start_datetime').text)
+      start_datetime = event_element.at('./start_datetime').text
+      event.starts_at = Time.parse(start_datetime)
       event.ends_at = Time.parse(event_element.at('./end_datetime').text)
       # FIXME loop and use metaprogramming
       if subelement = event_element.at('./leader_notes')
@@ -34,6 +35,7 @@ class Event < ActiveRecord::Base
         event.setup_notes = subelement.text
       end
       event.resources = Resource.from_xml(event_element.xpath('./resources/resource'))
+      event.exceptions = EventException.from_xml(event_element.xpath('./exceptions/exception'), start_datetime.split(' ')[1])
       event
     end
   end

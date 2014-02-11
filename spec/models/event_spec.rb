@@ -27,6 +27,7 @@ describe Event do
       specify { @events[0].setup_ends_at.should == Time.new(2013,11,12,8,45,0) }
       specify { @events[0].setup_notes.should == 'Setup notes here' }
       specify { @events[0].resources.length.should == 2 }
+      specify { @events[0].exceptions.should be_blank }
     end
 
     context 'multiple events with a mix of resources and approvals' do
@@ -55,6 +56,20 @@ describe Event do
             event.should_not be_setupable
           end
         end
+      end
+    end
+
+    context 'one event with exceptions' do
+      let(:xml) do
+        extend ActionDispatch::TestProcess
+        f = fixture_file_upload('with_exceptions.xml', 'text/xml')
+        Nokogiri::XML(f).xpath("//events/event")
+      end
+      before { @events = Event.from_xml(xml) }
+      specify { @events.length.should == 1 }
+
+      it "should parse exceptions correctly" do
+        @events[0].exceptions.split('|').sort.should == ['2013-12-08T10:00:00','2014-02-09T10:00:00']
       end
     end
   end

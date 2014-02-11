@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131112012225) do
+ActiveRecord::Schema.define(version: 20140211024331) do
 
   create_table "events", force: true do |t|
     t.integer  "origin_ident",           default: 0, null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20131112012225) do
     t.text     "setup_notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "exceptions"
   end
 
   add_index "events", ["origin_ident"], name: "index_events_on_origin_ident"

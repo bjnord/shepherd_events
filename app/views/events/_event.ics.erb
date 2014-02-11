@@ -15,6 +15,11 @@ URL:<%= event_url(event) %>
 DTSTART<%= ics_time(event.starts_at, ics_time_zone) %>
 <% if event.recurs? -%>
 RRULE:<%= Recurrence.new(event.recurrence_description.dup).rrule(event.ends_at) %>
+<% unless event.exceptions.blank? -%>
+<% event.exceptions.split('|').each do |exdate| -%>
+EXDATE<%= ics_time(Time.parse(exdate), ics_time_zone) %>
+<% end -%>
+<% end -%>
 <% end -%>
 DTEND<%= ics_time(event.ends_at, ics_time_zone) %>
 <%= render partial: 'event_common', locals: {event: event} -%>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ccb_api>
+     <request>
+          <parameters>
+               <argument value="event_profiles" name="srv"/>
+               <argument value="2014-01-02" name="modified_since"/>
+          </parameters>
+     </request>
+     <response>
+          <service>event_profiles</service>
+          <service_action>execute</service_action>
+          <availability>public</availability>
+          <events count="1">
+               <event id="361">
+                    <name>SS Coach Mtg</name>
+                    <description>Meeting for SS Coaches with Christie Cotner</description>
+                    <leader_notes></leader_notes>
+                    <start_datetime>2013-10-13 10:00:00</start_datetime>
+                    <start_date>Oct 13, 2013</start_date>
+                    <start_time>10:00 AM</start_time>
+                    <end_datetime>2013-10-13 11:00:00</end_datetime>
+                    <end_date>Oct 13, 2013</end_date>
+                    <end_time>11:00 AM</end_time>
+                    <timezone>America/Chicago</timezone>
+                    <recurrence_description>Every month on the second Sunday of the month until Apr 13, 2014 from 10:00 AM to 11:00 AM</recurrence_description>
+                    <exceptions>
+                         <exception>
+                              <date>2013-12-08</date>
+                         </exception>
+                         <exception>
+                              <date>2014-02-09</date>
+                         </exception>
+                    </exceptions>
+                    <group id="176">SS Volunteers</group>
+                    <organizer id="1119">Dana Lochner</organizer>
+                    <phone type="contact"></phone>
+                    <location/>
+                    <registration>
+                         <limit>0</limit>
+                         <event_type id="2">Registration/Invitation Required</event_type>
+                         <forms/>
+                    </registration>
+                    <resources>
+                         <resource id="38">
+                              <name>Room 167</name>
+                              <description>&lt;html&gt;&#13;
+12' conference table, 12 chairs&#13;
+&lt;br&gt;The &quot;Jesus Room&quot;</description>
+                              <status id="3">Approved</status>
+                              <resource_type>Location</resource_type>
+                              <user_defined_fields/>
+                         </resource>
+                    </resources>
+                    <setup>
+                         <start>2013-10-13 10:00:00</start>
+                         <end>2013-10-13 11:00:00</end>
+                         <notes></notes>
+                    </setup>
+                    <event_grouping id=""></event_grouping>
+                    <creator id="1119">Dana Lochner</creator>
+                    <modifier id="551">Christie Cotner</modifier>
+                    <created>2013-10-03 12:51:10</created>
+                    <modified>2014-01-14 14:57:37</modified>
+               </event>
+          </events>
+     </response>
+</ccb_api>
