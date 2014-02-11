@@ -13,6 +13,10 @@ class Recurrence
     elsif m = /Every\s+week\s+on\s+(\w+)/.match(description)
       @freq = 'WEEKLY'
       @byday = m[1][0..1].upcase
+    elsif m = /Every\s+(\d+)\s+weeks\s+on\s+(\w+)/.match(description)
+      @freq = 'WEEKLY'
+      @interval = m[1]
+      @byday = m[2][0..1].upcase
     elsif m = /Every\s+month\s+on\s+the\s+(\w+)\s+(\w+)\s+of\s+the\s+month/.match(description)
       @freq = 'MONTHLY'
       @byday = deordinal(m[1]).to_s + m[2][0..1].upcase
@@ -33,6 +37,9 @@ class Recurrence
     end
     if @byday
       rr += ";BYDAY=#{@byday}"
+    end
+    if @interval
+      rr += ";INTERVAL=#{@interval}"
     end
     rr
   end

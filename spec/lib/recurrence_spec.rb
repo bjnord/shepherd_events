@@ -30,6 +30,12 @@ describe Recurrence do
       specify { subject.rrule(etime).should == 'FREQ=WEEKLY;UNTIL=20140313T071421Z;BYDAY=TH' }
     end
 
+    context 'with 2-weekly end-dated recurrence and event time' do
+      subject { Recurrence.new('Every 2 weeks on Thursday until May 20, 2014 from 7:00 PM to 8:15 PM') }
+      let(:etime) { DateTime.parse('2014-01-24T07:28:35Z') }
+      specify { subject.rrule(etime).should == 'FREQ=WEEKLY;UNTIL=20140520T072835Z;BYDAY=TH;INTERVAL=2' }
+    end
+
     context 'with monthly forever recurrence' do
       subject { Recurrence.new('Every month on the last Saturday of the month from 10:00 AM to 11:30 AM') }
       its(:rrule) { should == 'FREQ=MONTHLY;BYDAY=-1SA' }
