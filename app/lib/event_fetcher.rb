@@ -37,6 +37,8 @@ private
     end
     errors = xml.xpath("//error").collect {|e| "#{e['type']}: #{e.text}" }
     raise EventFetcherError, "fetch server errors on #{options} -> #{errors.join(' -> ')}" if errors.length > 0
+    events = xml.xpath("//events/event").collect {|e| e.name }
+    raise EventFetcherError, "no events returned from #{options}" if events.length < 1
     xml
   end
 end
