@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+if ccb = File.open(ARGV[0], 'rb')
+  xml = Nokogiri::XML(ccb.read)
+  ccb.close
+else
+  abort "couldn't open file \"#{ARGV[0]}\""
+end
+event_elements = xml.xpath("//events/event").collect {|e| e.name }
+puts "#{event_elements.length} events found"
+puts "  first = [#{event_elements[0]}]" if event_elements.length > 0
+Event.from_xml(xml.xpath("//events/event")).each do |event|
+  if ARGV[1] && (event.origin_ident != ARGV[1].to_i)
+    next
+  end
+  puts "XML event: [#{event.inspect}]"
+  event.resources.each do |resource|
+    puts "  resour.:   status=#{resource.status} [#{resource.inspect}]"
+  end
+  puts "setupable? #{event.setupable?}"
+  old_event = Event.find_by_origin_ident(event.origin_ident)
+  puts "old event: [#{old_event.inspect}]" if old_event
+  puts "-- " unless ARGV[1]
+end
