@@ -20,6 +20,10 @@ class Recurrence
     elsif m = /Every\s+month\s+on\s+the\s+(\w+)\s+(\w+)\s+of\s+the\s+month/.match(description)
       @freq = 'MONTHLY'
       @byday = deordinal(m[1]).to_s + m[2][0..1].upcase
+    elsif m = /Every\s+(\d+)\s+months\s+on\s+the\s+(\w+)\s+(\w+)\s+of\s+the\s+month/.match(description)
+      @freq = 'MONTHLY'
+      @interval = m[1]
+      @byday = deordinal(m[2]).to_s + m[3][0..1].upcase
     else
       raise RecurrenceError, "unknown recurrence '#{description}'"
     end

@@ -41,6 +41,11 @@ describe Recurrence do
       its(:rrule) { should == 'FREQ=MONTHLY;BYDAY=-1SA' }
     end
 
+    context 'with 3-monthly forever recurrence' do
+      subject { Recurrence.new('Every 3 months on the second Friday of the month from 10:00 AM to 11:30 AM') }
+      its(:rrule) { should == 'FREQ=MONTHLY;BYDAY=2FR;INTERVAL=3' }
+    end
+
     context 'with monthly end-dated recurrence' do
       subject { Recurrence.new('Every month on the first Saturday of the month until Jun 7, 2014 from 10:00 AM to 11:30 AM') }
       its(:rrule) { should == 'FREQ=MONTHLY;UNTIL=20140607T000000Z;BYDAY=1SA' }
